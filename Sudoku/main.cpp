@@ -11,6 +11,31 @@
 
 using namespace std;
 
+int choice(vector<string> &files, bool save)
+{
+    while(true)
+    {
+        try 
+        {
+            cout << "Unesite redni broj fajla koji zelite da se koristi za " << (save ? "cuvanje" : "ucitavanje") << ":" << endl;
+            
+            for(int i = 0;i < files.size();i++)
+            {
+                cout << i + 1 << ". " << files[i] << endl;
+            }
+            
+            int choice;
+            cin >> choice;
+            
+            return (choice - 1);
+        } 
+        catch (...)
+        {
+            cout << "Nepostojeca opcija! Pokusajte ponovo..." << endl;
+        }
+    }
+}
+
 int main(int argc, const char * argv[]) {
     srand(unsigned(time(0)));
     
