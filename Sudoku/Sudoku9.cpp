@@ -167,7 +167,7 @@ bool Sudoku9::isOkay()
     return badElems.empty();
 }
 
-bool Sudoku9::solveTableRec(int i, int j, set<int> rows[9], set<int> cols[9], set<int> boxes[9])
+bool Sudoku9::solveTableRec(int i, int j, set<int> (&rows)[9], set<int> (&cols)[9], set<int> (&boxes)[9])
 {
     if(j == 9)
     {

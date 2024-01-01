@@ -37,54 +37,89 @@ int choice(vector<string> &files, bool save)
 }
 
 int main(int argc, const char * argv[]) {
+    vector<string> files;
+    string startingPath = "/Users/rogan003/Desktop/Fakultet/3. semestar/OOP 2/Projektni_zadatak/Sudoku/Sudoku/";
+    
+    for (int i = 1; i < argc; ++i)
+    {
+        files.push_back(argv[i]);
+    }
+    
     srand(unsigned(time(0)));
     
-    SudokuTest test;
-    test.test();
+    //SudokuTest test;
+    //test.test();
     
     cout << "DOBRO DOSLI U SUDOKU IZAZOV!\n=========================" << endl;
     
     while(true)
     {
-        cout << "Ukoliko zelite da ucitate sudoku izazov unesite naziv datoteke gde se nalazi izazov, a ukoliko zelite da Vam program izgenerise izazov unesite broj 1: ";
+        cout << "Ukoliko zelite da ucitate sudoku izazov unesite 1, a ukoliko zelite da Vam program izgenerise izazov unesite broj 2: ";
         string input;
         cin >> input;
         
-        if(input == "1")
+        int option = choice(files, input == "2");
+        
+        if(input == "2")
         {
-            cout << "Unesite naziv datoteke gde zelite da Vam se sacuva izazov";
-            cin >> input;
-            SudokuGame game(input);
+            SudokuGame game(startingPath + files[option]);
             
-            cout << "Ukoliko zelite da resite sudoku zagonetku unesite naziv datoteke gde se resenje nalazi, a ukoliko zelite da Vam je program resi unesite broj 1: ";
-            cin >> input;
-            if(input == "1")
+            while(true)
             {
-                cout << "Unesite naziv datoteke gde zelite da Vam se sacuva resenje izazova: ";
+                cout << "Ukoliko zelite da resite sudoku zagonetku unesite 1, a ukoliko zelite da Vam je program resi unesite broj 2: ";
                 cin >> input;
-                game.solve(false, input);
+                
+                option = choice(files, (input == "2"));
+                
+                if(input == "2")
+                {
+                    game.solve(false, files[option]);
+                }
+                else if(input == "1")
+                {
+                    game.solve(true, files[option]);
+                }
+                else
+                {
+                    cout << "Nevazeca opcija! Pokusajte ponovo..." << endl;
+                    continue;
+                }
+                
+                break;
             }
-            else
+        }
+        else if(input == "1")
+        {
+            SudokuGame game(startingPath + files[option], true);
+            
+            while(true)
             {
-                game.solve(true, input);
+                cout << "Ukoliko zelite da resite sudoku zagonetku unesite 1, a ukoliko zelite da Vam je program resi unesite broj 2: ";
+                cin >> input;
+                
+                option = choice(files, (input == "2"));
+                
+                if(input == "2")
+                {
+                    game.solve(false, files[option]);
+                }
+                else if(input == "1")
+                {
+                    game.solve(true, files[option]);
+                }
+                else
+                {
+                    cout << "Nevazeca opcija! Pokusajte ponovo..." << endl;
+                    continue;
+                }
+                
+                break;
             }
         }
         else
         {
-            SudokuGame game(input, true);
-            
-            cout << "Ukoliko zelite da resite sudoku zagonetku unesite naziv datoteke gde se resenje nalazi, a ukoliko zelite da Vam je program resi unesite broj 1: ";
-            cin >> input;
-            if(input == "1")
-            {
-                cout << "Unesite naziv datoteke gde zelite da Vam se sacuva resenje izazova: ";
-                cin >> input;
-                game.solve(false, input);
-            }
-            else
-            {
-                game.solve(true, input);
-            }
+            cout << "Nepostojeca opcija! Pokusajte ponovo..." << endl;
+            continue;
         }
         
         cout << "Ukoliko zelite da nastavite sa resavanjem sudoku izazova unesite DA, a ukoliko zelite prekinuti napisite NE: ";

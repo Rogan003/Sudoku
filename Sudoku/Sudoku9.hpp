@@ -19,7 +19,7 @@ class Sudoku9
     int table[9][9];
     int goodNums;
     int badNums;
-    bool solveTableRec(int i, int j, set<int> rows[9], set<int> cols[9], set<int> boxes[9]);
+    bool solveTableRec(int i, int j, set<int> (&rows)[9], set<int> (&cols)[9], set<int> (&boxes)[9]);
     
 public:
     Sudoku9();
