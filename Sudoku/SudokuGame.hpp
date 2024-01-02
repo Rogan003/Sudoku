@@ -3,7 +3,7 @@
 //  Sudoku
 //
 //  Created by Veselin Roganovic on 25.12.23..
-//
+//  Klasa SudokuGame predstavlja funkcionalnosti koje igra sudoku izazov zahteva. Kao atribute ima sudoku tablu za trenutnu igru i staticki atribut gameNum koji predstavlja trenutni redni broj igre. Od metoda ima konstruktor za varijantu igre sa pocetnim ucitavanjem table, konstruktor sa varijantom igre sa pocetnim nasumicnim generisanjem table, metodu za ispis statistickih informacija igre i metodu za resavanje sudoku table u igri.
 
 #ifndef SudokuGame_hpp
 #define SudokuGame_hpp

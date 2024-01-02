@@ -3,7 +3,7 @@
 //  Sudoku
 //
 //  Created by Veselin Roganovic on 24.12.23..
-//
+//  Main fajl projekta - odavde, konkretnije iz main funkcije u ovom fajlu, pocinje izvrsavanje programa
 
 #include <iostream>
 #include "SudokuGame.hpp"
@@ -11,8 +11,10 @@
 
 using namespace std;
 
+// Pomocna funkcija za izbor fajla od svih prosledjenih kroz argumente komandne linije. Kao parametre prima referencu na vektor sa nazivima fajlova i bool vrednost koja oznacava da li zelimo da taj u taj fajl cuvamo ili iz njega ucitavamo. Kao povratnu vrednost vraca indeks naziva fajla u vektoru svih naziva fajlova.
 int choice(vector<string> &files, bool save)
 {
+    // Korisniku se ispisuju svi nazivi fajlova i daje mu se da izabere jedan. Bira sve dok ne unese validnu postojecu opciju.
     while(true)
     {
         try 
@@ -27,8 +29,9 @@ int choice(vector<string> &files, bool save)
             int choice;
             cin >> choice;
             
-            return (choice - 1);
-        } 
+            if(choice >= 1 && choice <= files.size()) return (choice - 1);
+            else cout << "Nepostojeca opcija! Pokusajte ponovo..." << endl;
+        }
         catch (...)
         {
             cout << "Nepostojeca opcija! Pokusajte ponovo..." << endl;
@@ -36,7 +39,9 @@ int choice(vector<string> &files, bool save)
     }
 }
 
+// Main funkcija, pocetna tacka ovog programa
 int main(int argc, const char * argv[]) {
+    // Kreiramo vektor naziva fajlova prosledjenih kroz argumente komandne linije i ucitavamo ih odatle. Takodje kreiramo i dodatnu promenljivu za apsolutnu putanju u projektu.
     vector<string> files;
     string startingPath = "/Users/rogan003/Desktop/Fakultet/3. semestar/OOP 2/Projektni_zadatak/Sudoku/Sudoku/";
     
@@ -45,21 +50,27 @@ int main(int argc, const char * argv[]) {
         files.push_back(argv[i]);
     }
     
+    // Podesavamo random seed da uvek daje nasumicne brojeve
     srand(unsigned(time(0)));
     
+    // Pozivanje testova, inicijalno zakomentarisno
     //SudokuTest test;
     //test.test();
     
+    // Ispis dobrodoslice korisniku
     cout << "DOBRO DOSLI U SUDOKU IZAZOV!\n=========================" << endl;
     
+    // Dok korisnik ne odluci da prestane sa igranjem, ponavljamo igre
     while(true)
     {
+        // Nudimo pocetne opcije korisniku
         cout << "Ukoliko zelite da ucitate sudoku izazov unesite 1, a ukoliko zelite da Vam program izgenerise izazov unesite broj 2: ";
         string input;
         cin >> input;
         
         int option = choice(files, input == "2");
         
+        // Ucitavamo igru na nacin na koji je korisnik specifirao, nudimo mu opcije za resavanje i resavanje se vrsi na nacin na koji je specifirao
         if(input == "2")
         {
             SudokuGame game(startingPath + files[option]);
@@ -122,7 +133,8 @@ int main(int argc, const char * argv[]) {
             continue;
         }
         
-        cout << "Ukoliko zelite da nastavite sa resavanjem sudoku izazova unesite DA, a ukoliko zelite prekinuti napisite NE: ";
+        // Dajemo korisniku opciju za kraj igre
+        cout << "Ukoliko zelite prekinuti igranje napisite NE: ";
         cin >> input;
         
         if(input == "NE")
