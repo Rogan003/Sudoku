@@ -17,7 +17,7 @@ SudokuTest::SudokuTest(bool creationTest, bool loadingTest, bool okayTest, int s
 // Test za ucitavanje table iz datoteke, vraca da li je test uspesan
 bool SudokuTest::tableLoadingTest()
 {
-    // Test za ucitavanje table sa svim praznim poljima O (polje u matrici ima vrednost 0), ako neko polje nije 0 test pada
+    // Test za ucitavanje table sa svim praznim poljima razmak (polje u matrici ima vrednost 0), ako neko polje nije 0 test pada
     // Promenljiva indikator validnosti testa 1
     bool pass1 = true;
     
@@ -96,7 +96,7 @@ bool SudokuTest::tableLoadingTest()
 // Test za proveru rada funkcije koja proverava da li je tabla dobro popunjena i podesava vrednosti dobrih i lose postavljenih polja, vraca da li je test uspesan
 bool SudokuTest::isOkayTest()
 {
-    // Test za isOkay table sa svim praznim poljima O i provera da li funkcija vraca tacan rezultat, broj dobrih i lose postavljenih polja treba da bude 0
+    // Test za isOkay table sa svim praznim poljima razmak i provera da li funkcija vraca tacan rezultat, broj dobrih i lose postavljenih polja treba da bude 0
     // Promenljiva indikator validnosti testa 1
     bool pass1 = true;
     

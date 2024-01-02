@@ -20,7 +20,7 @@ Sudoku9::Sudoku9(const string filePath) : goodNums(0), badNums(0)
     this->loadTable(filePath);
 }
 
-// Metoda za ucitavanje table, prima jedan parametar koji predstavlja put do fajla gde je smestena sudoku tabla koju treba ucitati. Parsira jedan po jedan red tog fajla po unapred poznatom pravilu, a to je da se redovi koji razdvajaju redove brojeva (_________________) preskacu, a redovi sa brojevima se ucitavaju u matricu polja tako sto se preskacu razdvajaci polja (|), tj. ucitava se svaki drugi karakter i njegovu vrednost stavljamo u odgovarajuce polja matrice polja. Karakteri se parsiraju tako sto se brojevi 1-9 direktno takvi zapisuju, dok se karakter O, koji predstavlja prazno polje, u matricu polja zapisuje kao 0.
+// Metoda za ucitavanje table, prima jedan parametar koji predstavlja put do fajla gde je smestena sudoku tabla koju treba ucitati. Parsira jedan po jedan red tog fajla po unapred poznatom pravilu, a to je da se redovi koji razdvajaju redove brojeva (_________________) preskacu, a redovi sa brojevima se ucitavaju u matricu polja tako sto se preskacu razdvajaci polja (|), tj. ucitava se svaki drugi karakter i njegovu vrednost stavljamo u odgovarajuce polja matrice polja. Karakteri se parsiraju tako sto se brojevi 1-9 direktno takvi zapisuju, dok se karakter razmaka, koji predstavlja prazno polje, u matricu polja zapisuje kao 0.
 void Sudoku9::loadTable(const string filePath)
 {
     // Otvaramo zeljeni fajl i citamo iz njega red po red
@@ -40,8 +40,8 @@ void Sudoku9::loadTable(const string filePath)
             // Prolazimo kroz sve karaktere i parsiramo ih i upisujemo
             for(int i = 0;i < 9;i++)
             {
-                // Pristupamo karakteru polja iz datoteke i ako je on O upisujemo 0, a ako nije, upisujemo ga kao broj
-                if(inputLine[i * 2] == 'O')
+                // Pristupamo karakteru polja iz datoteke i ako je on razmak upisujemo 0, a ako nije, upisujemo ga kao broj
+                if(inputLine[i * 2] == ' ')
                 {
                     this->table[row][i] = 0;
                 }
@@ -58,7 +58,7 @@ void Sudoku9::loadTable(const string filePath)
     file.close();
 }
 
-// Metoda za cuvanje table, prima jedan parametar koji predstavlja put do fajla gde treba smestiti sudoku tablu. Sudoku tablu smestamo tako sto svaki niz iz matrice polja predstavlja red u fajlu, gde je svako polje, tj vrednost elementa niza matrice, odvojeno sa |, a redovi sa _________________. Polja iz matrice koja nisu prazna predstavljamo takva kakva jesu, dok prazna polja zapisujemo kao O.
+// Metoda za cuvanje table, prima jedan parametar koji predstavlja put do fajla gde treba smestiti sudoku tablu. Sudoku tablu smestamo tako sto svaki niz iz matrice polja predstavlja red u fajlu, gde je svako polje, tj vrednost elementa niza matrice, odvojeno sa |, a redovi sa _________________. Polja iz matrice koja nisu prazna predstavljamo takva kakva jesu, dok prazna polja zapisujemo kao razmak.
 void Sudoku9::saveTable(const string filePath)
 {
     // Otvaramo zeljeni fajl
@@ -71,10 +71,10 @@ void Sudoku9::saveTable(const string filePath)
     {
         for(int j = 0;j < 9;j++)
         {
-            // Ako je element prazno polje (0) upisujemo ga kao O, a ako je popunjeno polje upisujemo ga takvog kakav jeste
+            // Ako je element prazno polje (0) upisujemo ga kao razmak, a ako je popunjeno polje upisujemo ga takvog kakav jeste
             if(this->table[i][j] == 0)
             {
-                file << 'O';
+                file << ' ';
             }
             else
             {
@@ -341,6 +341,41 @@ void Sudoku9::writeStats()
 {
     cout << "Broj dobro postavljenih brojeva: " << this->goodNums << endl;
     cout << "Broj pogresaka: " << this->badNums << endl;
+}
+
+// Metoda za ispis tabele u konzolu. Ne prima nijedan parametar i ne vraca povratnu vrednost.
+void Sudoku9::outputTable()
+{
+    // Prolazimo kroz sva polja matrice i njihove vrednosti ispisujemo na ekran. Prazno polje se predstavlja kao razmak. Redove razdvajamo sa razdvajacem (_________________) i svaki je odvojen u dodatnom novom redu.
+    for(int i = 0;i < 9;i++)
+    {
+        for(int j = 0;j < 9;j++)
+        {
+            // Ako je element prazno polje (0) upisujemo ga kao razmak, a ako je popunjeno polje upisujemo ga takvog kakav jeste
+            if(this->table[i][j] == 0)
+            {
+                cout << ' ';
+            }
+            else
+            {
+                cout << this->table[i][j];
+            }
+            
+            // svaka dva polja razdvajamo sa |
+            if(j != 8)
+            {
+                cout << "|";
+            }
+        }
+        
+        // Svaki red razdvajamo sa _________________
+        if(i != 8)
+        {
+            cout << "\n_________________\n";
+        }
+    }
+    
+    cout << endl << endl;
 }
 
 // Geter metoda za odredjeno polje table. Kao parametre dve celobrojne vrednosti, tj. koordinate polja, a vraca celobrojnu vrednost table na tom polju.

@@ -10,17 +10,19 @@
 // Inicijalizacija staticke promenljive za broj odigranih partija na 0
 int SudokuGame::gameNum = 0;
 
-// Konstruktor za kreaciju partije sa nasumicnim generisanjem table, uzima jedan parametar, a to je string koji predstavlja put do fajla gde ce se sacuvati nasumicno generisana tabla. Broj partija se povecava za jedan.
+// Konstruktor za kreaciju partije sa nasumicnim generisanjem table, uzima jedan parametar, a to je string koji predstavlja put do fajla gde ce se sacuvati nasumicno generisana tabla. Broj partija se povecava za jedan i ispisujemo tablu.
 SudokuGame::SudokuGame(const string filePath) : sudoku()
 {
     this->gameNum++;
     this->sudoku.saveTable(filePath);
+    this->sudoku.outputTable();
 }
 
-// Konstruktor za kreaciju partije sa ucitavanjem table, uzima dva parametetrax, a to su string koji predstavlja put do fajla odakle se ucitava tabla i informacija za cuvanje table. Broj partija se povecava za jedan.
+// Konstruktor za kreaciju partije sa ucitavanjem table, uzima dva parametetrax, a to su string koji predstavlja put do fajla odakle se ucitava tabla i informacija za cuvanje table. Broj partija se povecava za jedan i ispisujemo tablu.
 SudokuGame::SudokuGame(const string filePath, const bool load) : sudoku(filePath)
 {
     this->gameNum++;
+    this->sudoku.outputTable();
 }
 
 // Metoda za ispis statistickih parametara partije, prima jedan parametar, a to je da li je sudoku tabla uspesno resena. Nema povratne vrednosti. Ispisuje broj partije, da li je tabla uspesno resena i statisticke informacije same table putem njene metode.
@@ -40,8 +42,9 @@ void SudokuGame::solve(const bool user, const string filePath)
     
     if(user)
     {
-        // Ako resava korisnik, kreiramo novi objekat sudoku table i u njega ucitavamo korisnicko resenje
+        // Ako resava korisnik, kreiramo novi objekat sudoku table i u njega ucitavamo korisnicko resenje i ispisujemo ga
         Sudoku9 sudokuSolution(filePath);
+        sudokuSolution.outputTable();
         
         // Prolazimo kroz sve elemente sudoku resenja i uporedjujemo da li je ono validno za zadatu tablu u igri. Ako neko polje nije popunjeno ili je neko polje promenjeno, resenje nije validno.
         for(int i = 0;i < 9;i++)
@@ -86,8 +89,9 @@ void SudokuGame::solve(const bool user, const string filePath)
     }
     else
     {
-        // Ako resava program, tabla se resava preko poznate funkcije, proverava se validnost resenja i cuva se tabla u fajlu
+        // Ako resava program, tabla se resava preko poznate funkcije, ispisuje, proverava se validnost resenja i cuva se tabla u fajlu
         this->sudoku.solveTable();
+        this->sudoku.outputTable();
         if(!this->sudoku.isOkay() || this->sudoku.getGoodNums() != 81)
         {
             solved = false;

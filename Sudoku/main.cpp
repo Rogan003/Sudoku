@@ -134,10 +134,10 @@ int main(int argc, const char * argv[]) {
         }
         
         // Dajemo korisniku opciju za kraj igre
-        cout << "Ukoliko zelite prekinuti igranje napisite NE: ";
+        cout << "Ukoliko zelite prekinuti igranje unesite broj 1: ";
         cin >> input;
         
-        if(input == "NE")
+        if(input == "1")
         {
             break;
         }
@@ -147,3 +147,7 @@ int main(int argc, const char * argv[]) {
     
     return 0;
 }
+
+// DODATI:
+// 1. SPOJITI KONSTRUKTORE ZA SUDOKUGAME
+// 2. DODATI TESTOVE ZA RESAVANJE ZA SUDOKUGAME (AKO IMA NESTO PAMETNO, POPUT KAD KORISNIK PROSLEDI POGRESAN FAJL)
