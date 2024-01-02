@@ -39,6 +39,8 @@
 		421804072B3B88F5007DD80C /* tablefull */ = {isa = PBXFileReference; lastKnownFileType = text; path = tablefull; sourceTree = "<group>"; };
 		421804092B3C7187007DD80C /* tablegood */ = {isa = PBXFileReference; lastKnownFileType = text; path = tablegood; sourceTree = "<group>"; };
 		4218040A2B3F9A1B007DD80C /* tablealmostgood */ = {isa = PBXFileReference; lastKnownFileType = text; path = tablealmostgood; sourceTree = "<group>"; };
+		4218040B2B4386D3007DD80C /* test4 */ = {isa = PBXFileReference; lastKnownFileType = text; path = test4; sourceTree = "<group>"; };
+		4218040C2B43908E007DD80C /* test9 */ = {isa = PBXFileReference; lastKnownFileType = text; path = test9; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +85,8 @@
 				421804072B3B88F5007DD80C /* tablefull */,
 				421804092B3C7187007DD80C /* tablegood */,
 				4218040A2B3F9A1B007DD80C /* tablealmostgood */,
+				4218040B2B4386D3007DD80C /* test4 */,
+				4218040C2B43908E007DD80C /* test9 */,
 			);
 			path = Sudoku;
 			sourceTree = "<group>";

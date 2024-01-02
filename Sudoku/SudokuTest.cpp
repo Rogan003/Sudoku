@@ -14,7 +14,7 @@ SudokuTest::SudokuTest() : loadingTest(true), okayTest(true), creationTest(true)
 // Konstruktor sa parametrima za klasu SudokuTest, podesava koji testovi i koliko puta ce neki od njih biti izvedeni
 SudokuTest::SudokuTest(bool creationTest, bool loadingTest, bool okayTest, int saveTest, int solTest) : creationTest(creationTest), loadingTest(loadingTest), okayTest(okayTest), saveTest(saveTest), solTest(solTest) {}
 
-// Test za ucitavanje table iz datoteke
+// Test za ucitavanje table iz datoteke, vraca da li je test uspesan
 bool SudokuTest::tableLoadingTest()
 {
     // Test za ucitavanje table sa svim praznim poljima O (polje u matrici ima vrednost 0), ako neko polje nije 0 test pada
@@ -93,7 +93,7 @@ bool SudokuTest::tableLoadingTest()
     return pass1 && pass2 && pass3;
 }
 
-// Test za proveru rada funkcije koja proverava da li je tabla dobro popunjena i podesava vrednosti dobrih i lose postavljenih polja
+// Test za proveru rada funkcije koja proverava da li je tabla dobro popunjena i podesava vrednosti dobrih i lose postavljenih polja, vraca da li je test uspesan
 bool SudokuTest::isOkayTest()
 {
     // Test za isOkay table sa svim praznim poljima O i provera da li funkcija vraca tacan rezultat, broj dobrih i lose postavljenih polja treba da bude 0
@@ -175,7 +175,7 @@ bool SudokuTest::isOkayTest()
     return pass1 && pass2 && pass3 && pass4;
 }
 
-// Test za proveru rada funkcije za kreaciju nove table, ocekujemo da nijedna podmatrica nema vise od 6 brojeva i da su svi brojevi od 1-9 ili 0 za prazno polje, kao i da je moguce resiti ovakvu tablu
+// Test za proveru rada funkcije za kreaciju nove table, ocekujemo da nijedna podmatrica nema vise od 6 brojeva i da su svi brojevi od 1-9 ili 0 za prazno polje, kao i da je moguce resiti ovakvu tablu, vraca da li je test uspesan
 bool SudokuTest::tableCreationTest()
 {
     // Kreacija nasumicne nove table putem konstruktora bez parametara
@@ -233,7 +233,7 @@ bool SudokuTest::tableCreationTest()
     return numNums && allNums && isOkay;
 }
 
-// Test za cuvanje table u fajlu, proveravamo da li ta sacuvana tabla moze da se ucita sa ocuvanim stanjem (samim kriterijumom funkcije citanja mora biti napisana u lepom citljivom formatu u fajlu)
+// Test za cuvanje table u fajlu, proveravamo da li ta sacuvana tabla moze da se ucita sa ocuvanim stanjem (samim kriterijumom funkcije citanja mora biti napisana u lepom citljivom formatu u fajlu), vraca da li je test uspesan
 bool SudokuTest::tableSaveTest()
 {
     // Kreiramo novu nasumicnu tablu konstruktorom bez parametara
@@ -263,7 +263,7 @@ bool SudokuTest::tableSaveTest()
     return true;
 }
 
-// Test za funkciju za resavanje date sudoku table, proveravamo da li je kompletno i ispravno popunjena
+// Test za funkciju za resavanje date sudoku table, proveravamo da li je kompletno i ispravno popunjena, vraca da li je test uspesan
 bool SudokuTest::solveTest()
 {
     // Kreiramo nasumicnu novu sudoku tablu konstruktorom bez parametara

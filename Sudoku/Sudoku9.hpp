@@ -3,7 +3,8 @@
 //  Sudoku
 //
 //  Created by Veselin Roganovic on 24.12.23..
-//
+//  Sudoku9 je klasa koja predstavlja sudoku tablu sa matricom polja, brojacem dobro postavljenih polja i brojacem lose postavljenih polja. U samoj matrici prazna polja predstavljena su sa 0, a brojevi od 1-9 predstavljaju validne vrednosti polja sudoku table.
+//  Metode ove klase su metode za ucitavanje i cuvanje table iz/u datoteke, generisanje nove table, proveru validnosti table (isOkay), resavanje date table, kao i pomocna metoda za rekurzivno resavanje table, ispis statistickih informacija za tablu, geteri za brojac dobrih polja i brojac losih polja i geter i seter za odredjeno polje table
 
 #ifndef Sudoku9_hpp
 #define Sudoku9_hpp

@@ -30,6 +30,7 @@ void SudokuGame::writeStats(const bool solved)
 void SudokuGame::solve(const bool user, const string filePath)
 {
     bool solved = true;
+    bool wrongTable = false;
     
     if(user)
     {
@@ -45,7 +46,7 @@ void SudokuGame::solve(const bool user, const string filePath)
                 {
                     if(solVal != 0)
                     {
-                        this->sudoku.setTableNumberValue(i, j, val);
+                        this->sudoku.setTableNumberValue(i, j, solVal);
                     }
                     else
                     {
@@ -57,6 +58,7 @@ void SudokuGame::solve(const bool user, const string filePath)
                     if(val != solVal)
                     {
                         solved = false;
+                        wrongTable = true;
                     }
                 }
             }
@@ -66,10 +68,19 @@ void SudokuGame::solve(const bool user, const string filePath)
         {
             solved = false;
         }
+        
+        if(!wrongTable)
+        {
+            this->sudoku.isOkay();
+        }
     }
     else
     {
         this->sudoku.solveTable();
+        if(!this->sudoku.isOkay() || this->sudoku.getGoodNums() != 81)
+        {
+            solved = false;
+        }
         this->sudoku.saveTable(filePath);
     }
     

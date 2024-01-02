@@ -73,11 +73,11 @@ int main(int argc, const char * argv[]) {
                 
                 if(input == "2")
                 {
-                    game.solve(false, files[option]);
+                    game.solve(false, startingPath + files[option]);
                 }
                 else if(input == "1")
                 {
-                    game.solve(true, files[option]);
+                    game.solve(true, startingPath + files[option]);
                 }
                 else
                 {
@@ -101,11 +101,11 @@ int main(int argc, const char * argv[]) {
                 
                 if(input == "2")
                 {
-                    game.solve(false, files[option]);
+                    game.solve(false, startingPath + files[option]);
                 }
                 else if(input == "1")
                 {
-                    game.solve(true, files[option]);
+                    game.solve(true, startingPath + files[option]);
                 }
                 else
                 {
@@ -129,6 +129,8 @@ int main(int argc, const char * argv[]) {
         {
             break;
         }
+        
+        cout << "=========================" << endl;
     }
     
     return 0;

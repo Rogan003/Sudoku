@@ -8,18 +8,22 @@
 #include "Sudoku9.hpp"
 #include <fstream>
 
+// Podrazumevani konstruktor klase Sudoku9, poziva metodu za generisanje nove sudoku table i postavlja brojac dobrih i losih polja na 0
 Sudoku9::Sudoku9() : goodNums(0), badNums(0)
 {
     this->createTable();
 }
 
+// Konstruktor sa jednim parametrom klase Sudoku9, gde je taj parametar je put do fajla gde je smestena sudoku tabla koju treba ucitati, poziva metodu za ucitavanje table i postavlja brojac dobrih i losih polja na 0
 Sudoku9::Sudoku9(const string filePath) : goodNums(0), badNums(0)
 {
     this->loadTable(filePath);
 }
 
+// Metoda za ucitavanje table, prima jedan parametar koji predstavlja put do fajla gde je smestena sudoku tabla koju treba ucitati. Parsira jedan po jedan red tog fajla po unapred poznatom pravilu, a to je da se redovi koji razdvajaju redove brojeva (_________________) preskacu, a redovi sa brojevima se ucitavaju u matricu polja tako sto se preskacu razdvajaci polja (|), tj. ucitava se svaki drugi karakter i njegovu vrednost stavljamo u odgovarajuce polja matrice polja. Karakteri se parsiraju tako sto se brojevi 1-9 direktno takvi zapisuju, dok se karakter O, koji predstavlja prazno polje, u matricu polja zapisuje kao 0.
 void Sudoku9::loadTable(const string filePath)
 {
+    // Otvaramo zeljeni fajl i citamo iz njega red po red
     ifstream file;
     
     file.open(filePath);
@@ -30,10 +34,13 @@ void Sudoku9::loadTable(const string filePath)
     
     while(getline(file, inputLine))
     {
+        // Ako red nije razdvajac redova, parsiramo i upisujemo karaktere
         if(inputLine[0] != '_')
         {
+            // Prolazimo kroz sve karaktere i parsiramo ih i upisujemo
             for(int i = 0;i < 9;i++)
             {
+                // Pristupamo karakteru polja iz datoteke i ako je on O upisujemo 0, a ako nije, upisujemo ga kao broj
                 if(inputLine[i * 2] == 'O')
                 {
                     this->table[row][i] = 0;
@@ -51,16 +58,20 @@ void Sudoku9::loadTable(const string filePath)
     file.close();
 }
 
+// Metoda za cuvanje table, prima jedan parametar koji predstavlja put do fajla gde treba smestiti sudoku tablu. Sudoku tablu smestamo tako sto svaki niz iz matrice polja predstavlja red u fajlu, gde je svako polje, tj vrednost elementa niza matrice, odvojeno sa |, a redovi sa _________________. Polja iz matrice koja nisu prazna predstavljamo takva kakva jesu, dok prazna polja zapisujemo kao O.
 void Sudoku9::saveTable(const string filePath)
 {
+    // Otvaramo zeljeni fajl
     ofstream file;
     
     file.open(filePath);
     
+    // Prolazimo niz po niz kroz matricu polja i onda element po element kroz svaki pojedinacni niz
     for(int i = 0;i < 9;i++)
     {
         for(int j = 0;j < 9;j++)
         {
+            // Ako je element prazno polje (0) upisujemo ga kao O, a ako je popunjeno polje upisujemo ga takvog kakav jeste
             if(this->table[i][j] == 0)
             {
                 file << 'O';
@@ -70,12 +81,14 @@ void Sudoku9::saveTable(const string filePath)
                 file << this->table[i][j];
             }
             
+            // svaka dva polja razdvajamo sa |
             if(j != 8)
             {
                 file << "|";
             }
         }
         
+        // Svaki red razdvajamo sa _________________
         if(i != 8)
         {
             file << "\n_________________\n";
